@@ -3,7 +3,7 @@ version: "3.9"
 services:
   windows:
     image: ghcr.io/dockur/windows:latest
-    container_name: windows
+    container_name: windows-office
 
     environment:
       # === Windows / VM Configuration ===
@@ -34,7 +34,7 @@ services:
 
     volumes:
       # === Persistent Windows volume ===
-      - ${HOME}/.local/share/dockur-windows/volumes/windows/storage:/storage
+      - ${HOME}/.local/share/dockur-windows/volumes/windows-office/storage:/storage
 
       # === OEM scripts mounted separately from project ===
       - ./storage/OEM:/OEM

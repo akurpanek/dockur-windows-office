@@ -1,1 +1,1 @@
-# [dockur-windows] Windows 11 and Microsoft 365
+# [dockur-windows] Windows 11 and Office 365
