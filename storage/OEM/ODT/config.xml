@@ -1,0 +1,30 @@
+<Configuration>
+  <!-- Install Microsoft 365 Apps (64-bit, German) -->
+  <Add OfficeClientEdition="64" Channel="Current">
+    <Product ID="O365ProPlusRetail">
+      <Language ID="de-de" />
+    </Product>
+  </Add>
+
+  <!-- Silent install -->
+  <Display Level="None" AcceptEULA="TRUE" />
+
+  <!-- Do not auto-activate -->
+  <Property Name="AUTOACTIVATE" Value="0"/>
+
+  <!-- Shared Computer Licensing (recommended for container/RDP) -->
+  <Property Name="SharedComputerLicensing" Value="1" />
+
+  <!-- Force-close running apps if needed -->
+  <Property Name="FORCEAPPSHUTDOWN" Value="TRUE" />
+
+  <!-- Remove unwanted components -->
+  <RemoveApp ID="OneDrive" />
+  <RemoveApp ID="Teams" />
+
+  <!-- Enable updates after install -->
+  <Updates Enabled="TRUE" />
+
+  <!-- Remove legacy MSI Office -->
+  <RemoveMSI />
+</Configuration>

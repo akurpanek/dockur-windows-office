@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  windows:
+    image: ghcr.io/dockur/windows:latest
+    container_name: windows
+
+    environment:
+      # === Windows / VM Configuration ===
+      VERSION: "11"                 # Windows version
+      RAM_SIZE: 8G                  # RAM for VM
+      CPU_CORES: "4"                # CPU cores
+      DISK_SIZE: 64G                # Virtual disk size
+
+      # === User configuration ===
+      USERNAME: ${WIN_USERNAME}
+      PASSWORD: ${WIN_PASSWORD}
+      HOME: ${HOME}
+      LANGUAGE: German
+      REGION: de-DE
+
+    cap_add:
+      - NET_ADMIN
+
+    # === Port forwaring ===
+    ports:
+      - "8006:8006"                 # web console (noVNC)
+      - "3389:3389/tcp"             # RDP TCP
+      - "3389:3389/udp"             # RDP UDP
+
+    stop_grace_period: 120s
+    restart: on-failure
+    privileged: true
+
+    volumes:
+      # === Persistent Windows volume ===
+      - ${HOME}/.local/share/dockur-windows/volumes/windows/storage:/storage
+
+      # === OEM scripts mounted separately from project ===
+      - ./storage/OEM:/OEM
+
+      # === Shared folder between Host and Guest ===
+      - ${HOME}:/shared
+
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+      - /dev/bus/usb
